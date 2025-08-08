@@ -7,10 +7,17 @@ enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        // Bleeding-edge: Google's alpha repository for AGP 8.13 alpha versions
+        maven("https://dl.google.com/dl/android/maven2/")
+        // Bleeding-edge: AndroidX snapshot repository
+        maven("https://androidx.dev/snapshots/builds/")
+        // Standard repositories
         google()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven("https://jitpack.io")
+        // Bleeding-edge: Sonatype snapshots for latest versions
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 
@@ -22,6 +29,11 @@ plugins {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
+        // Bleeding-edge: Google's alpha repository for latest versions
+        maven("https://dl.google.com/dl/android/maven2/")
+        // Bleeding-edge: AndroidX snapshot repository
+        maven("https://androidx.dev/snapshots/builds/")
+        // Standard repositories
         google()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
@@ -36,10 +48,13 @@ dependencyResolutionManagement {
 // Genesis Protocol - Project Configuration
 rootProject.name = "Genesis-Os"
 
-// Genesis Protocol - Core Modules
+// Genesis Protocol - Test module for verification
+include(":test-module")
+
+// Genesis Protocol - Core Modules - BLEEDING EDGE ENABLED
 include(":app")
 
-// Genesis Protocol - AI Ecosystem Modules 
+// Genesis Protocol - AI Ecosystem Modules - BLEEDING EDGE ENABLED
 include(":core-module")
 include(":feature-module") 
 include(":datavein-oracle-native")

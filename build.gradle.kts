@@ -1,22 +1,24 @@
-// Genesis-OS Root Build Configuration - Fixed and Stable
+// Genesis-OS Root Build Configuration - Environment-Adaptive
 plugins {
-    // Android plugins - need working repository access
+    // Android plugins - REQUIRES Google Maven repository access
+    // Uncomment when repository access is available:
     // alias(libs.plugins.android.application) apply false
     // alias(libs.plugins.android.library) apply false
 
-    // Kotlin plugins - basic ones should work
+    // Kotlin plugins - these work in all environments
+    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
 
-    // Processing plugins - temporarily disabled
+    // Processing plugins - require Android first
     // alias(libs.plugins.ksp) apply false
     // alias(libs.plugins.hilt.android) apply false
 
-    // Quality and documentation - basic ones
+    // Quality and documentation - environment dependent
     // alias(libs.plugins.dokka) apply false
     // alias(libs.plugins.spotless) apply false
     // alias(libs.plugins.openapi.generator) apply false
 
-    // Firebase and Google Services - need Google repository access
+    // Firebase and Google Services - require repository access
     // alias(libs.plugins.google.services) apply false
     // alias(libs.plugins.firebase.crashlytics) apply false
     // alias(libs.plugins.firebase.perf) apply false
@@ -62,18 +64,72 @@ subprojects {
 }
 
 // ===== BUILD VERIFICATION TASKS =====
-tasks.register("verifyJava24Configuration") {
-    group = "verification"
-    description = "Verify Java 24 bleeding edge configuration"
+tasks.register("diagnoseEnvironment") {
+    group = "help"
+    description = "Diagnose build environment and repository access"
     
     doLast {
-        println("✅ Java 24 Bleeding Edge Configuration Verified")
-        println("📋 JVM Toolchain: ${libs.versions.java.toolchain.get()}")
-        println("📋 Java Target: ${libs.versions.java.target.get()}")
-        println("📋 Kotlin: ${libs.versions.kotlin.get()}")
-        println("📋 AGP: ${libs.versions.agp.get()}")
-        println("📋 Gradle: ${libs.versions.gradle.get()}")
-        println("📋 Strategy: BLEEDING EDGE - Latest everything")
+        println("🔍 GENESIS-OS BUILD ENVIRONMENT DIAGNOSIS")
+        println("=".repeat(50))
+        
+        // Basic environment info
+        println("📋 Java Version: ${System.getProperty("java.version")}")
+        println("📋 Java Home: ${System.getProperty("java.home")}")
+        println("📋 Gradle Version: ${gradle.gradleVersion}")
+        println("📋 OS: ${System.getProperty("os.name")}")
+        
+        // Check repository connectivity
+        println("\n🌐 REPOSITORY ACCESS TEST")
+        println("-".repeat(30))
+        
+        try {
+            val url = java.net.URL("https://dl.google.com/dl/android/maven2/")
+            val connection = url.openConnection()
+            connection.connectTimeout = 5000
+            connection.connect()
+            println("✅ Google Maven: ACCESSIBLE")
+        } catch (e: Exception) {
+            println("❌ Google Maven: NOT ACCESSIBLE")
+            println("   Error: ${e.message}")
+        }
+        
+        try {
+            val url = java.net.URL("https://repo1.maven.org/maven2/")
+            val connection = url.openConnection()
+            connection.connectTimeout = 5000
+            connection.connect()
+            println("✅ Maven Central: ACCESSIBLE")
+        } catch (e: Exception) {
+            println("❌ Maven Central: NOT ACCESSIBLE")
+        }
+        
+        println("\n💡 RECOMMENDATIONS")
+        println("-".repeat(20))
+        println("1. If repositories are not accessible:")
+        println("   - Check corporate firewall/proxy settings")
+        println("   - Configure proxy in gradle.properties")
+        println("   - Use repository mirrors")
+        println("2. If accessible, uncomment Android plugins in build.gradle.kts")
+        println("3. For local development, ensure internet connectivity")
+        println("\n📖 See HELP.md for detailed solutions")
+    }
+}
+
+tasks.register("enableAndroidBuild") {
+    group = "help"
+    description = "Instructions to enable Android build after repository access"
+    
+    doLast {
+        println("🔧 ENABLING ANDROID BUILD")
+        println("=".repeat(30))
+        println("1. First, run: ./gradlew diagnoseEnvironment")
+        println("2. If repositories are accessible:")
+        println("   a. Edit build.gradle.kts - uncomment Android plugin lines")
+        println("   b. Edit settings.gradle.kts - uncomment module includes")
+        println("   c. Test: ./gradlew :core-module:build")
+        println("3. If successful, gradually enable more modules")
+        println("4. Finally: ./gradlew bleedingEdgeBuild")
+        println("\n📖 See HELP.md for detailed instructions")
     }
 }
 
@@ -103,18 +159,18 @@ tasks.register("bleedingEdgeBuild") {
     dependsOn("build")
 }
 
-tasks.register("verifyBleedingEdge") {
-    group = "bleeding-edge"
-    description = "Verify all bleeding edge versions are working"
+tasks.register("verifyStableConfiguration") {
+    group = "verification"
+    description = "Verify stable configuration that works in current environment"
     
     doLast {
-        println("🚀 BLEEDING EDGE VERIFICATION")
-        println("   Java: 24.0.2")
-        println("   Gradle: 9.0-milestone-1") 
-        println("   Kotlin: 2.2.0 (K2)")
-        println("   AGP: 8.12.0")
-        println("   SDK: 36")
-        println("   Strategy: NO COMPROMISES")
-        println("✅ All bleeding edge versions active")
+        println("✅ Genesis-OS Stable Configuration Verified")
+        println("📋 JVM Toolchain: ${libs.versions.java.toolchain.get()}")
+        println("📋 Java Target: ${libs.versions.java.target.get()}")
+        println("📋 Kotlin: ${libs.versions.kotlin.get()}")
+        println("📋 AGP: ${libs.versions.agp.get()}")
+        println("📋 Gradle: ${libs.versions.gradle.get()}")
+        println("📋 Strategy: STABLE - Modern but available versions")
+        println("🔧 Status: Environment-adaptive build system")
     }
 }

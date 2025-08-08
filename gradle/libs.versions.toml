@@ -8,7 +8,7 @@ java-source = "17"
 embedded = "17"         # Compatible embedded version
 
 # ===== CORE BUILD TOOLS =====
-agp = "8.1.4"   # Well-established stable AGP version
+agp = "7.4.2"   # Older stable AGP version that should be widely available
 gradle = "9.0.0"        # Latest stable Gradle version
 kotlin = "2.2.0"         # Latest Kotlin with JVM_24 support
 kotlinReflect = "2.2.0"

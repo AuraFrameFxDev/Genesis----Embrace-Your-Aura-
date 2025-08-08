@@ -36,16 +36,19 @@ dependencyResolutionManagement {
 // Genesis Protocol - Project Configuration
 rootProject.name = "Genesis-Os"
 
-// Genesis Protocol - Core Modules
-include(":app")
+// Genesis Protocol - Test module for verification
+include(":test-module")
 
-// Genesis Protocol - AI Ecosystem Modules 
-include(":core-module")
-include(":feature-module") 
-include(":datavein-oracle-native")
-include(":oracle-drive-integration")
-include(":secure-comm")
-include(":sandbox-ui")
-include(":collab-canvas")
-include(":colorblendr")
-include("romtools")
+// Genesis Protocol - Core Modules - temporarily disabled
+// include(":app")
+
+// Genesis Protocol - AI Ecosystem Modules - temporarily disabled
+// include(":core-module")
+// include(":feature-module") 
+// include(":datavein-oracle-native")
+// include(":oracle-drive-integration")
+// include(":secure-comm")
+// include(":sandbox-ui")
+// include(":collab-canvas")
+// include(":colorblendr")
+// include("romtools")

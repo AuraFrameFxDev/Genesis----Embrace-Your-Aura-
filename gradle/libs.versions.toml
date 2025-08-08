@@ -1,14 +1,14 @@
 [versions]
-# ===== JAVA 24 WITH JVM TOOLCHAIN 24 =====
-java-toolchain = "24"
-jvmTarget = "24"
-javaVersion = "24"
-java-target = "24"
-java-source = "24"
-embedded = "24"         # Latest embedded version
+# ===== JAVA WITH JVM TOOLCHAIN (Compatible with current environment) =====
+java-toolchain = "17"
+jvmTarget = "17"
+javaVersion = "17"
+java-target = "17"
+java-source = "17"
+embedded = "17"         # Compatible embedded version
 
 # ===== CORE BUILD TOOLS =====
-agp = "8.13.0-alpha02"   # BLEEDING-EDGE AGP with latest Windows fixes
+agp = "8.1.4"   # Well-established stable AGP version
 gradle = "9.0.0"        # Latest stable Gradle version
 kotlin = "2.2.0"         # Latest Kotlin with JVM_24 support
 kotlinReflect = "2.2.0"
@@ -18,9 +18,9 @@ googleServices = "4.4.3" # Google Services plugin
 openApiGenerator = "7.14.0" # OpenAPI Generator plugin
 
 # ===== ANDROID SDK VERSIONS =====
-compileSdk = "36"        # Latest SDK
-minSdk = "33"            # Minimum SDK for the project
-targetSdk = "36"         # Target SDK
+compileSdk = "35"        # Latest stable SDK
+minSdk = "24"            # Reasonable minimum SDK for the project
+targetSdk = "35"         # Target SDK
 cmakeVersion = "3.22.1"  # Available CMake version
 
 # ===== CODE QUALITY & DOCUMENTATION =====
@@ -28,14 +28,14 @@ dokka = "2.0.0"         # Latest Dokka 2.0
 spotless = "7.2.1"     # Stable Spotless
 
 # ===== COMPOSE & UI =====
-composeBom = "2025.07.00"  # Latest 2025 Compose BOM from Dependabot
+composeBom = "2024.12.01"  # Latest stable Compose BOM
 composeCompiler = "1.5.15"  # Latest Compose Compiler
 activityCompose = "1.10.1"  # Latest from Dependabot
 
 # ===== GOOGLE SERVICES =====
-firebaseBom = "34.0.0"  # ACTUAL latest Firebase BOM (July 21, 2025)
-firebaseCrashlytics = "3.0.5"  # Latest Firebase Crashlytics
-firebasePerf = "2.0.0"  # Latest Firebase Performance
+firebaseBom = "33.7.0"  # Latest stable Firebase BOM
+firebaseCrashlytics = "3.0.3"  # Latest stable Firebase Crashlytics
+firebasePerf = "1.4.2"  # Latest stable Firebase Performance
 firebaseAnalyticsKtx = "22.1.2"  # Latest Firebase Analytics KTX
 firebaseCrashlyticsKtx = "19.2.1"  # Latest Firebase Crashlytics KTX
 
@@ -46,7 +46,7 @@ roomVersion = "2.7.2"   # Latest Room with KSP 2 bug fixes
 lifecycle = "2.9.2"     # Latest lifecycle components
 
 # ===== NETWORKING =====
-retrofit = "3.0.0"      # Latest Retrofit with kotlinx-serialization support
+retrofit = "2.11.0"      # Latest stable Retrofit version
 okhttp = "5.1.0"       # Stable OkHttp
 kotlinxSerialization = "1.9.0"  # Stable serialization
 kotlinxCoroutines = "1.10.2"  # Stable coroutines
